@@ -1,0 +1,10 @@
+[package]
+name = "quote-of-the-day"
+version = "0.1.0"
+edition = "2021"
+authors = ["Naman Sood <mail@nsood.in>"]
+repository = "https://github.com/tendstofortytwo/quote-of-the-day"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
