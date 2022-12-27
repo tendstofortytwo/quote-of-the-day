@@ -90,6 +90,8 @@ fn main() -> Result<()> {
         for stream in l.incoming() {
             match stream {
                 Ok(mut stream) => {
+                    // not entirely sure why peer_addr() could fail, but oh well
+                    println!("request from tcp:{}", stream.peer_addr().unwrap());
                     let quotes = tcp_quotes.lock().expect("quotes mutex poisoned");
                     match send_quote(&mut stream, &quotes) {
                         Ok(()) => (),
@@ -116,6 +118,7 @@ fn main() -> Result<()> {
                     continue;
                 }
             };
+            println!("request from udp:{}", return_addr);
             let mut conn = UdpConn(&l, return_addr);
             let quotes = udp_quotes.lock().expect("quotes mutex poisoned");
             match send_quote(&mut conn, &quotes) {
