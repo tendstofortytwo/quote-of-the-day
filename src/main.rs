@@ -85,7 +85,7 @@ fn main() -> Result<()> {
 
     let tcp_quotes = quotes.clone();
     let tcp_thread = thread::spawn(move || {
-        let l = TcpListener::bind(SocketAddr::from(([0, 0, 0, 0], port)))?;
+        let l = TcpListener::bind(SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 0], port)))?;
         println!("listening on TCP {}", l.local_addr().expect("could not read local addr"));
         for stream in l.incoming() {
             match stream {
@@ -105,7 +105,7 @@ fn main() -> Result<()> {
     
     let udp_quotes = quotes.clone();
     let udp_thread = thread::spawn(move || -> Result<()> {
-        let l = UdpSocket::bind(SocketAddr::from(([0, 0, 0, 0], port)))?;
+        let l = UdpSocket::bind(SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 0], port)))?;
         println!("listening on UDP {}", l.local_addr().expect("could not read local addr"));
         loop {
             let mut buf = [0u8; 0];
